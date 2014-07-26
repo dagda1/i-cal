@@ -5,7 +5,7 @@
   :dependencies
   [
     [org.clojure/clojure "1.5.1"]
-    [org.clojure/clojurescript "0.0-2173"]
+    [org.clojure/clojurescript "0.0-2197"]
     [org.clojure/core.async "0.1.267.0-0d7780-alpha"]
 
     [liberator "0.11.0"]
@@ -57,7 +57,7 @@
 
   :plugins
   [
-    [lein-cljsbuild "1.0.2"]
+    [lein-cljsbuild "1.0.3"]
     [lein-ring "0.8.10"]
     [lein-midje "3.1.3"] ; Example-based testing https://github.com/marick/lein-midje
   ]
@@ -65,17 +65,18 @@
   :source-paths ["src/clj"]
   :cljsbuild {
     :builds [{:id "dev"
-              :source-paths ["src/cljs"]
-              :compiler {
-                :output-to "resources/public/js/application.js"
-                :output-dir "resources/public/js/out"
-                :optimizations :none
-                :source-map true
-                :preamble ["reagent/react.js"]}}]}
+    :source-paths ["src/cljs"]
+    :compiler
+    {:optimizations :none
+     :output-to "resources/public/js/i_cal.js"
+     :output-dir "resources/public/js/"
+     :pretty-print true
+     :source-map true}}]}
 
   :ring {:handler i-cal.core/app
          :init    i-cal.core/init}
 
   :min-lein-version "2.0.0"
   :main ^:skip-aot i-cal.core
+  :homemin-lein-version "2.0.0"
 )

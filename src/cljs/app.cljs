@@ -1,17 +1,21 @@
-;;; If this namespace requires macros, remember that ClojureScript's
-;;; macros are written in Clojure and have to be referenced via the
-;;; :require-macros directive where the :as keyword is required, while in Clojure is optional. Even
-;;; if you can add files containing macros and compile-time only
-;;; functions in the :source-paths setting of the :builds, it is
-;;; strongly suggested to add them to the leiningen :source-paths.
-(ns i-cal.app)
+(ns i-cal.core
+  (:require [reagent.core :as reagent :refer [atom]]))
 
-(defn foo [greeting]
-  (if greeting
-    (str greeting "ClojureScript!")
-    (str "Hello, ClojureScript!")))
+(def state (atom {:doc {} :saved? false}))
 
-(.write js/document (foo "Welcome to "))
+(enable-console-print!)
 
+(defn log [s]
+  (.log js/console (str s)))
 
+(log "hoors")
 
+(defn some-component []
+  [:div
+   [:h3 "I am a component!"]
+   [:p.someclass 
+    "I have " [:strong "bold"]
+    [:span {:style {:color "red"}} " and red"]
+    " text."]])
+
+(reagent/render-component [some-component] (.getElementById js/document "app"))
