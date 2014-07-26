@@ -49,12 +49,6 @@
                 [lein-midje "3.1.3"] ; Example-based testing https://github.com/marick/lein-midje
                 ]
     }
-
-    :srcmap {:cljsbuild
-                      {:builds
-                       {:client {:compiler
-                                 {:source-map "target/client.js.map"
-                                  :source-map-path "client"}}}}}
   }
 
   :aliases {
@@ -69,15 +63,15 @@
   ]
 
   :source-paths ["src/clj"]
-
-  :cljsbuild
-  {:builds
-   {:client {:source-paths ["src"]
-             :compiler
-             {:preamble ["reagent/react.js"]
-              :output-dir "target/client"
-              :output-to "target/client.js"
-              :pretty-print true}}}}
+  :cljsbuild {
+    :builds [{:id "dev"
+              :source-paths ["src/cljs"]
+              :compiler {
+                :output-to "resources/public/js/application.js"
+                :output-dir "resources/public/js/out"
+                :optimizations :none
+                :source-map true
+                :preamble ["reagent/react.js"]}}]}
 
   :ring {:handler i-cal.core/app
          :init    i-cal.core/init}
