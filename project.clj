@@ -61,17 +61,18 @@
 
   :source-paths ["src/clj"]
 
-  :test-paths ["test/clj" "test/cljs" "test/cljs/ic_cal"]
+  :test-paths ["test/clj" "test/cljs" "test/cljs/ic_cal", "test"]
 
   :cljsbuild {
     :test-commands {"unit" ["phantomjs" :runner
-                            "this.literal_js_was_evaluated=true"
-                            "target/unit-test.js"]}
+                                      "this.literal_js_was_evaluated=true"
+                                      "target/unit-test.js"]}
     :builds [
       {:id "dev"
         :source-paths ["src/cljs"]
         :compiler
-        {:optimizations :none
+        {:preamble ["reagent/react.js"]
+         :optimizations :none
          :output-to "resources/public/js/i_cal.js"
          :output-dir "resources/public/js/"
          :pretty-print true
@@ -83,7 +84,8 @@
                        "test/clj"
                        "test/cljs"
                        "test/cljs/ic_cal"]
-        :compiler {:output-to "target/unit-test.js"
+        :compiler {:preamble ["reagent/react.js"]
+                   :output-to "target/unit-test.js"
                    :optimizations :whitespace
                    :pretty-print true}}
     ]
