@@ -47,7 +47,7 @@
                     ]
       :plugins [
                   [com.cemerick/austin "0.1.3"]
-                  [com.cemerick/clojurescript.test "0.3.0"]
+                  [com.cemerick/clojurescript.test "0.3.1"]
                 ]
       :repl-options {:nrepl-middleware [cemerick.piggieback/wrap-cljs-repl]}
     }
