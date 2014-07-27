@@ -46,8 +46,10 @@
                      [ring-mock "0.1.5"]
                     ]
       :plugins [
-                [lein-midje "3.1.3"] ; Example-based testing https://github.com/marick/lein-midje
+                  [com.cemerick/austin "0.1.3"]
+                  [com.cemerick/clojurescript.test "0.3.0"]
                 ]
+      :repl-options {:nrepl-middleware [cemerick.piggieback/wrap-cljs-repl]}
     }
   }
 
@@ -59,19 +61,37 @@
   [
     [lein-cljsbuild "1.0.3"]
     [lein-ring "0.8.10"]
-    [lein-midje "3.1.3"] ; Example-based testing https://github.com/marick/lein-midje
   ]
 
   :source-paths ["src/clj"]
+
+  :test-paths ["test/clj" "test/cljs"]
+
   :cljsbuild {
-    :builds [{:id "dev"
-    :source-paths ["src/cljs"]
-    :compiler
-    {:optimizations :none
-     :output-to "resources/public/js/i_cal.js"
-     :output-dir "resources/public/js/"
-     :pretty-print true
-     :source-map true}}]}
+    :test-commands {"unit" ["phantomjs" :runner
+                            "this.literal_js_was_evaluated=true"
+                            "target/unit-test.js"]}
+    :builds [
+      {:id "dev"
+        :source-paths ["src/cljs"]
+        :compiler
+        {:optimizations :none
+         :output-to "resources/public/js/i_cal.js"
+         :output-dir "resources/public/js/"
+         :pretty-print true
+         :source-map true}}
+      {:id "test"
+        :source-paths ["src"
+                       "src/clj"
+                       "src/cljs"
+                       "test/clj"
+                       "test/cljs"
+                       "test/cljs/ic_cal"]
+        :compiler {:output-to "target/unit-test.js"
+                   :optimizations :whitespace
+                   :pretty-print true}}
+    ]
+  }
 
   :ring {:handler i-cal.core/app
          :init    i-cal.core/init}
