@@ -63,7 +63,7 @@
 
   :source-paths ["src/clj"]
 
-  :test-paths ["test/clj" "test/cljs" "test/cljs/ic_cal", "test"]
+  :test-paths ["test/cljs/ic_cal"]
 
   :cljsbuild {
     :test-commands {"unit" ["phantomjs" :runner
