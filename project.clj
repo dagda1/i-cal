@@ -26,6 +26,7 @@
                       [org.clojure/tools.trace "0.7.6"] ; Tracing macros/fns https://github.com/clojure/tools.trace
                       [com.cemerick/piggieback "0.1.2"] ; ClojureScript bREPL from the nREPL https://github.com/cemerick/piggieback
                       [clj-ns-browser "1.3.1"] ; Doc browser https://github.com/franks42/clj-ns-browser
+                      [org.clojure/tools.nrepl "0.2.3"]
                       [ring-mock "0.1.5"]
                     ]
       :injections [
@@ -44,10 +45,11 @@
       :dependencies [
                      [midje "1.6.3"] ; Example-based testing https://github.com/marick/Midje
                      [ring-mock "0.1.5"]
+                     [org.clojure/tools.nrepl "0.2.3"]
                     ]
       :plugins [
                   [com.cemerick/austin "0.1.3"]
-                  [com.cemerick/clojurescript.test "0.3.1"]
+                  [com.cemerick/clojurescript.test "0.3.0"]
                 ]
       :repl-options {:nrepl-middleware [cemerick.piggieback/wrap-cljs-repl]}
     }
@@ -65,6 +67,8 @@
 
   :cljsbuild {
     :test-commands {"unit" ["phantomjs" :runner
+                                      "resources/public/js/goog/base.js"
+                                      "test/cljs/polyfills/bind.js"
                                       "this.literal_js_was_evaluated=true"
                                       "target/unit-test.js"]}
     :builds [
@@ -86,7 +90,7 @@
                        "test/cljs/ic_cal"]
         :compiler {:preamble ["reagent/react.js"]
                    :output-to "target/unit-test.js"
-                   :optimizations :whitespace
+                   :optimizations :none
                    :pretty-print true}}
     ]
   }
