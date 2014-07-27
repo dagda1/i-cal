@@ -53,10 +53,6 @@
     }
   }
 
-  :aliases {
-    "midje" ["with-profile" "test" "midje"] ; run unit tests
-  }
-
   :plugins
   [
     [lein-cljsbuild "1.0.3"]
@@ -65,7 +61,7 @@
 
   :source-paths ["src/clj"]
 
-  :test-paths ["test/clj" "test/cljs"]
+  :test-paths ["test/clj" "test/cljs" "test/cljs/ic_cal"]
 
   :cljsbuild {
     :test-commands {"unit" ["phantomjs" :runner

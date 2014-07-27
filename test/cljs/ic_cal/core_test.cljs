@@ -1,7 +1,7 @@
 (ns i-cal.core-test
-  (:require-macros [cemerick.cljs.test :as m :refer (deftest testing are)])
-  (:require [cemerick.cljs.test :as t]
-            [i-cal.core :refer (foo)]))
+  (:require-macros [cemerick.cljs.test
+                    :refer (is deftest with-test run-tests testing test-var)])
+  (:require [cemerick.cljs.test :as t]))
 
 (deftest somewhat-less-wat
   (is (= "{}[]" (+ {} []))))
