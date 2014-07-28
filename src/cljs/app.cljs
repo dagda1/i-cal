@@ -10,7 +10,7 @@
 (defn log [s]
   (.log js/console (str s)))
 
-(log "hoors droop")
+(log "hoors drooppy droop")
 
 (defn some-component []
   [:div

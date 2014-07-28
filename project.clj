@@ -69,11 +69,11 @@
   :test-paths ["test/cljs/ic_cal"]
 
   :cljsbuild {
-    :test-commands {"unit" ["phantomjs" :runner
-                                      "resources/public/js/goog/base.js"
-                                      "test/cljs/polyfills/bind.js"
-                                      "this.literal_js_was_evaluated=true"
-                                      "target/cljsbuild-compiler-1/unit-test.js"]}
+    ; :test-commands {"unit" ["phantomjs" :runner
+    ;                                   "resources/public/js/goog/base.js"
+    ;                                   "test/cljs/polyfills/bind.js"
+    ;                                   "this.literal_js_was_evaluated=true"
+    ;                                   "target/cljsbuild-compiler-1/unit-test.js"]}
     :builds [
       {:id "dev"
         :source-paths ["src/cljs"]
@@ -84,17 +84,26 @@
          :output-dir "resources/public/js/"
          :pretty-print true
          :source-map true}}
-      {:id "test"
-        :source-paths ["src"
-                       "src/clj"
-                       "src/cljs"
-                       "test/clj"
-                       "test/cljs"
-                       "test/cljs/ic_cal"]
-        :compiler {:preamble ["reagent/react.js"]
-                   :output-to "target/cljsbuild-compiler-1/unit-test.js"
-                   :optimizations :none
-                   :pretty-print true}}
+      {:id "devcards"
+        :source-paths ["src/cljs"]
+        :compiler
+        {:preamble ["reagent/react.js"]
+         :optimizations :none
+         :output-to "resources/public/devcards/js/example.js"
+         :output-dir "resources/public/devcards/js/"
+         :pretty-print true
+         :source-map true}}
+      ; {:id "test"
+      ;   :source-paths ["src"
+      ;                  "src/clj"
+      ;                  "src/cljs"
+      ;                  "test/clj"
+      ;                  "test/cljs"
+      ;                  "test/cljs/ic_cal"]
+      ;   :compiler {:preamble ["reagent/react.js"]
+      ;              :output-to "target/cljsbuild-compiler-1/unit-test.js"
+      ;              :optimizations :none
+      ;              :pretty-print true}}
     ]
   }
 
