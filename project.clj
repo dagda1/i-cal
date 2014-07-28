@@ -7,6 +7,8 @@
     [org.clojure/clojure "1.5.1"]
     [org.clojure/clojurescript "0.0-2197"]
     [org.clojure/core.async "0.1.267.0-0d7780-alpha"]
+    [devcards "0.1.1-SNAPSHOT"]
+    [figwheel "0.1.3-SNAPSHOT"]
 
     [liberator "0.11.0"]
 
@@ -59,6 +61,7 @@
   [
     [lein-cljsbuild "1.0.3"]
     [lein-ring "0.8.10"]
+    [lein-figwheel "0.1.3-SNAPSHOT"]
   ]
 
   :source-paths ["src/clj"]
@@ -70,7 +73,7 @@
                                       "resources/public/js/goog/base.js"
                                       "test/cljs/polyfills/bind.js"
                                       "this.literal_js_was_evaluated=true"
-                                      "target/unit-test.js"]}
+                                      "target/cljsbuild-compiler-1/unit-test.js"]}
     :builds [
       {:id "dev"
         :source-paths ["src/cljs"]
@@ -89,7 +92,7 @@
                        "test/cljs"
                        "test/cljs/ic_cal"]
         :compiler {:preamble ["reagent/react.js"]
-                   :output-to "target/unit-test.js"
+                   :output-to "target/cljsbuild-compiler-1/unit-test.js"
                    :optimizations :none
                    :pretty-print true}}
     ]
@@ -97,6 +100,17 @@
 
   :ring {:handler i-cal.core/app
          :init    i-cal.core/init}
+
+  :figwheel {
+   :http-server-root "public" ;; this will be in resources/
+   :port 3449                 ;; default
+
+   ;; CSS reloading
+   ;; :css-dirs has no default value
+   ;; if :css-dirs is set figwheel will detect css file changes and
+   ;; send them to the browser
+   :css-dirs ["resources/public/css"]
+}
 
   :min-lein-version "2.0.0"
   :main ^:skip-aot i-cal.core

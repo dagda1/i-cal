@@ -1,5 +1,7 @@
 (ns i-cal.core
-  (:require [reagent.core :as reagent :refer [atom]]))
+  (:require
+    [figwheel.client :as fw :include-macros true]
+    [reagent.core :as reagent :refer [atom]]))
 
 (def state (atom {:doc {} :saved? false}))
 
@@ -8,7 +10,7 @@
 (defn log [s]
   (.log js/console (str s)))
 
-(log "hoors")
+(log "hoors droop")
 
 (defn some-component []
   [:div
@@ -19,3 +21,7 @@
     " text."]])
 
 (reagent/render-component [some-component] (.getElementById js/document "app"))
+
+(fw/watch-and-reload
+  ;; :websocket-url "ws://localhost:3449/figwheel-ws" default
+  :jsload-callback (fn [] (print "reloaded"))) ;; optional callback
