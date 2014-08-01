@@ -1,12 +1,12 @@
 (defproject i-cal "0.1.0-SNAPSHOT"
-  :description "A ClojureScript and reagent full-sized drag & drop event calendar"
+  :description "A ClojureScript and om full-sized drag & drop event calendar"
   :url "https://github.com/dagda1/i-cal"
 
   :dependencies
   [
-    [org.clojure/clojure "1.5.1"]
-    [org.clojure/clojurescript "0.0-2197"]
-    [org.clojure/core.async "0.1.267.0-0d7780-alpha"]
+    [org.clojure/clojure "1.6.0"]
+    [org.clojure/clojurescript "0.0-2268" :scope "provided"]
+    [org.clojure/core.async "0.1.267.0-0d7780-alpha" :scope "provided"]
     [devcards "0.1.1-SNAPSHOT"]
     [figwheel "0.1.3-SNAPSHOT"]
 
@@ -15,7 +15,9 @@
     [compojure "1.1.8"] ; Web routing https://github.com/weavejester/compojure
     [liberator "0.11.0"] ; WebMachine (REST state machine) port to Clojure https://github.com/clojure-liberator/liberator
     [cljs-http "0.1.2"]
-    [reagent "0.4.2"]
+
+    [sablono "0.2.16"]
+    [om "0.6.2"]
   ]
 
   :uberjar-name "i-cal.jar"
@@ -78,7 +80,7 @@
       {:id "dev"
         :source-paths ["src/cljs"]
         :compiler
-        {:preamble ["reagent/react.js"]
+        {:preamble ["react/react.min.js"]
          :optimizations :none
          :output-to "resources/public/js/i_cal.js"
          :output-dir "resources/public/js/"
@@ -87,7 +89,7 @@
       {:id "devcards"
         :source-paths ["src/cljs"]
         :compiler
-        {:preamble ["reagent/react.js"]
+        {:preamble ["react/react.min.js"]
          :optimizations :none
          :output-to "resources/public/devcards/js/example.js"
          :output-dir "resources/public/devcards/js/"
@@ -100,7 +102,7 @@
       ;                  "test/clj"
       ;                  "test/cljs"
       ;                  "test/cljs/ic_cal"]
-      ;   :compiler {:preamble ["reagent/react.js"]
+      ;   :compiler {:preamble ["react"]
       ;              :output-to "target/cljsbuild-compiler-1/unit-test.js"
       ;              :optimizations :none
       ;              :pretty-print true}}

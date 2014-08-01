@@ -1,7 +1,8 @@
 (ns i-cal.core
   (:require
     [figwheel.client :as fw :include-macros true]
-    [reagent.core :as reagent :refer [atom]]))
+    [om.core :as om :include-macros true]
+    [om.dom :as dom :include-macros true]))
 
 (def state (atom {:doc {} :saved? false}))
 
@@ -10,17 +11,16 @@
 (defn log [s]
   (.log js/console (str s)))
 
-(log "hoors drooppy droop")
+(log "hoors droop")
 
-(defn some-component []
-  [:div
-   [:h3 "I am a component!"]
-   [:p.someclass 
-    "I have " [:strong "bold"]
-    [:span {:style {:color "red"}} " and red"]
-    " text."]])
+(defn widget [data owner]
+  (reify
+    om/IRender
+    (render [this]
+      (dom/h1 nil (:text data)))))
 
-(reagent/render-component [some-component] (.getElementById js/document "app"))
+(om/root widget {:text "Hello world!"}
+  {:target (. js/document (getElementById "app"))})
 
 (fw/watch-and-reload
   ;; :websocket-url "ws://localhost:3449/figwheel-ws" default

@@ -1,6 +1,6 @@
 # i-cal
 
-A ClojureScript and [reagent](https://github.com/jonase/reagent-tutorial) full-sized drag & drop event calendar.
+A ClojureScript and [om](https://github.com/swannodette/om) full-sized drag & drop event calendar.
 
 ## Usage
 
