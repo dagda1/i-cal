@@ -2,7 +2,8 @@
   (:require
     [figwheel.client :as fw :include-macros true]
     [om.core :as om :include-macros true]
-    [om.dom :as dom :include-macros true]))
+    [om.dom :as dom :include-macros true]
+    [sablono.core :as html :refer-macros [html]]))
 
 (def state (atom {:doc {} :saved? false}))
 
@@ -13,14 +14,11 @@
 
 (log "hoors droop")
 
-(defn widget [data owner]
-  (reify
-    om/IRender
-    (render [this]
-      (dom/h1 nil (:text data)))))
+(defn widget [data]
+  (om/component
+   (html [:h2 "This is an om component, " (:text data)])))
 
-(om/root widget {:text "Hello world!"}
-  {:target (. js/document (getElementById "app"))})
+(om/root widget {:text "hoors droop"} {:target js/document.body})
 
 (fw/watch-and-reload
   ;; :websocket-url "ws://localhost:3449/figwheel-ws" default
