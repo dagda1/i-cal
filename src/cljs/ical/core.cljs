@@ -9,8 +9,6 @@
 (defn log [s]
   (.log js/console (str s)))
 
-(log "floors or doors")
-
 (defn ical [data]
   (om/component
-   (html [:h2 "This will be the calendar, so it will"])))
+   (html [:h2 "Render calendar"])))
