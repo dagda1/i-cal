@@ -67,12 +67,12 @@
     [lein-figwheel "0.1.3-SNAPSHOT"]
   ]
 
-  :source-paths ["src/clj"]
+  ; :source-paths ["src/clj"]
 
-  :test-paths ["test/cljs/ic_cal"]
+  ; :test-paths ["test/cljs/ic_cal"]
 
   :cljsbuild {
-    :test-commands {"unit-tests" ["phantomjs" :runner
+    :test-commands {"unit-tests" ["runners/phantomjs.js" :runner
                                       "test/cljs/polyfills/bind.js"
                                       "test/cljs/polyfills/requestanimationframe.js"
                                       "target/unit-tests.js"]}
