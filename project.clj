@@ -80,36 +80,36 @@
       {:id "dev"
         :source-paths ["src/cljs"]
         :compiler
-        {:preamble ["react/react.min.js"]
-         :optimizations :none
-         :output-to "resources/public/js/i_cal.js"
-         :output-dir "resources/public/js/"
-         :pretty-print true
-         :source-map true}}
-      {:id "devcards"
-        :source-paths ["src/cljs"]
-        :compiler
-        {:preamble ["react/react.min.js"]
-         :optimizations :none
-         :output-to "resources/public/devcards/js/example.js"
-         :output-dir "resources/public/devcards/js/"
-         :pretty-print true
-         :source-map true}}
-      {:id "test"
-         :source-paths ["src"
-                 "src/clj"
-                 "src/cljs"
-                 "test/clj"
-                 "test/cljs"
-                 "test/cljs/ic_cal"]
-         :compiler {
+          {:preamble ["react/react.min.js"]
+           :optimizations :none
+           :output-to "resources/public/js/app.js"
+           :output-dir "resources/public/js/"
            :pretty-print true
-           :preamble ["react/react.min.js"]
-           :externs ["react/externs/react.js"]
-           ; :libs ["public/js/drawer.js" "public/js/uuid.js" "public/js/compress.js"]
-           :output-dir "target/"
-           :output-to "target/ical-test.js"
-           :optimizations :none}}]}
+           :source-map true}}]}
+      ; {:id "devcards"
+      ;   :source-paths ["src/cljs"]
+      ;   :compiler
+      ;     {:preamble ["react/react.min.js"]
+      ;      :optimizations :none
+      ;      :output-to "resources/public/devcards/js/example.js"
+      ;      :output-dir "resources/public/devcards/js/"
+      ;      :pretty-print true
+      ;      :source-map true}}
+      ; {:id "test"
+      ;    :source-paths ["src"
+      ;            "src/clj"
+      ;            "src/cljs"
+      ;            "test/clj"
+      ;            "test/cljs"
+      ;            "test/cljs/ic_cal"]
+      ;    :compiler {
+      ;      :pretty-print true
+      ;      :preamble ["react/react.min.js"]
+      ;      :externs ["react/externs/react.js"]
+      ;      ; :libs ["public/js/drawer.js" "public/js/uuid.js" "public/js/compress.js"]
+      ;      :output-dir "target/"
+      ;      :output-to "target/ical-test.js"
+      ;      :optimizations :none}}]}
 
   :ring {:handler i-cal.core/app
          :init    i-cal.core/init}

@@ -1,4 +1,4 @@
-(ns i-cal.core
+(ns app.core
   (:require
     [figwheel.client :as fw :include-macros true]
     [om.core :as om :include-macros true]

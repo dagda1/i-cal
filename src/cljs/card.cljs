@@ -1,9 +1,9 @@
 (ns example.core
   (:require
-   [om.core :as om :include-macros true]
-   [om.dom :as dom :include-macros true]
-   [sablono.core :as sab :include-macros true]
-   [devcards.core :as dc :include-macros true])
+    [om.core :as om :include-macros true]
+    [om.dom :as dom :include-macros true]
+    [sablono.core :as sab :include-macros true]
+    [devcards.core :as dc :include-macros true])
   (:require-macros
    [devcards.core :refer [defcard]]))
 
