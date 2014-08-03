@@ -1,3 +1,5 @@
+; test project example
+; https://github.com/mike-thompson-day8/cljsbuild-none-test-seed
 (defproject i-cal "0.1.0-SNAPSHOT"
   :description "A ClojureScript and om full-sized drag & drop event calendar"
   :url "https://github.com/dagda1/i-cal"
@@ -75,7 +77,7 @@
     :test-commands {"unit-tests" ["runners/phantomjs.js" :runner
                                       "test/cljs/polyfills/bind.js"
                                       "test/cljs/polyfills/requestanimationframe.js"
-                                      "target/unit-tests.js"]}
+                                      "target/test/ical-test.js"]}
     :builds [
       {:id "dev"
         :source-paths ["src/cljs"]
@@ -107,8 +109,8 @@
            :preamble ["react/react.min.js"]
            :externs ["react/externs/react.js"]
            ; :libs ["public/js/drawer.js" "public/js/uuid.js" "public/js/compress.js"]
-           :output-dir "target/"
-           :output-to "target/ical-test.js"
+           :output-dir "target/test"
+           :output-to "target/test/ical-test.js"
            :optimizations :none}}]}
 
   :ring {:handler i-cal.core/app
@@ -124,6 +126,10 @@
    ;; send them to the browser
    :css-dirs ["resources/public/css"]
 }
+
+  :aliases {"dev-cards" ["do" "clean," "figwheel" "devcards"]
+            "auto-test" ["do" "clean," "cljsbuild" "auto" "test"]}
+
 
   :min-lein-version "2.0.0"
   :main ^:skip-aot i-cal.core

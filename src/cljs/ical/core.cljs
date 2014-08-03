@@ -22,6 +22,9 @@
                     [:div.btn-group.pull-right
                      [:a.right {:href "#"} "Right"]
                      [:a.left {:href "#"} "Left"]]
-                    [:h3 "August 2014"]]))))
+                    [:h3 "August 2014"]
+                    [:table.table.table-striped.table-bordered.table-hover
+                     [:thead
+                      [:tr (map (fn [day] [:th day]) weekdays)]]]]))))
 
 
