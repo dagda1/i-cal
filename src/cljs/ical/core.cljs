@@ -11,6 +11,9 @@
 (defn log [s]
   (.log js/console (str s)))
 
+; (log (.format (js/moment)))
+; (log (. (. (js/moment ) subtract "days" offset) startOf "day"))
+
 (defn ical [data]
   (reify
     om/IDisplayName
@@ -25,6 +28,4 @@
                     [:h3 "August 2014"]
                     [:table.table.table-striped.table-bordered.table-hover
                      [:thead
-                      [:tr (map (fn [day] [:th day]) weekdays)]]]]))))
-
-
+                      [:tr (map #(identity [:th %]) weekdays)]]]]))))

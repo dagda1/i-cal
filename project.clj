@@ -7,6 +7,8 @@
     [org.clojure/clojure "1.6.0"]
     [org.clojure/clojurescript "0.0-2268" :scope "provided"]
     [org.clojure/core.async "0.1.267.0-0d7780-alpha" :scope "provided"]
+    [com.facebook/react "0.11.1"]
+    [com.momentjs/moment "2.7.0"]
     [devcards "0.1.1-SNAPSHOT"]
     [figwheel "0.1.3-SNAPSHOT"]
 
@@ -89,8 +91,7 @@
       {:id "devcards"
         :source-paths ["src/cljs"]
         :compiler
-          {:preamble ["react/react.min.js"]
-           :optimizations :none
+          {:optimizations :none
            :output-to "resources/public/devcards/js/example.js"
            :output-dir "resources/public/devcards/js/"
            :pretty-print true
@@ -104,12 +105,11 @@
                  "test/cljs/ic_cal"]
          :compiler {
            :pretty-print true
-           :preamble ["react/react.min.js"]
-           :externs ["react/externs/react.js"]
-           ; :libs ["public/js/drawer.js" "public/js/uuid.js" "public/js/compress.js"]
+           :preamble ["react/react.min.js", "moment/moment.min.js"]
+           :externs ["react/react.min.js", "moment/moment.min.js"]
            :output-dir "target/test"
            :output-to "target/test/ical-test.js"
-           :optimizations :none}}]}
+           :optimizations :simple}}]}
 
   :ring {:handler i-cal.core/app
          :init    i-cal.core/init}
