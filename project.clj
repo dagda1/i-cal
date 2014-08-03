@@ -1,5 +1,3 @@
-; test project example
-; https://github.com/mike-thompson-day8/cljsbuild-none-test-seed
 (defproject i-cal "0.1.0-SNAPSHOT"
   :description "A ClojureScript and om full-sized drag & drop event calendar"
   :url "https://github.com/dagda1/i-cal"
