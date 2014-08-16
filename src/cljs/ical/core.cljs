@@ -11,19 +11,22 @@
 (defn log [s]
   (.log js/console (str s)))
 
-; (log (js/moment (new js/Date)))
-; (log (.format (js/moment) "YYYY MM DDD"))
-; (log (. (. (js/moment ) subtract "days" offset) startOf "day"))
-; (-> current (.date 1) .weekday)
+; do this
+; moment().add('month', -1).endOf('month').startOf('week').add('days',1).format()
+(defn last-monday [current]
+  (->
+    current
+    (.add "month" -1)
+    (.endOf "month")
+    (.startOf "week")
+    (.add "days" 1)))
 
 (defn first-day-of-month [current]
   (let [start-of-month (.date current 1)
         week-day (.weekday start-of-month)]
     (if (= 1 week-day)
       start-of-month
-      start-of-month)))
-; do this
-; moment().add('month', -1).endOf('month').startOf('week').add('days',1).format()
+      (last-monday current))))
 
 (defn ical [data]
   (reify
@@ -34,7 +37,7 @@
       (render [this]
         (let [today (js/moment (new js/Date))
               first-day-of-month (first-day-of-month today)]
-          (log first-day-of-month)
+          (log (.format first-day-of-month "DD/MM/YYYY"))
           (html/html [:div.calendar-toolbar
                       [:div.btn-group.pull-right
                        [:a.right {:href "#"} "Right"]

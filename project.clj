@@ -32,9 +32,9 @@
                       [ring/ring-devel "1.2.1" :exclusions [joda-time]]
                       [print-foo "0.4.6"] ; Old school print debugging https://github.com/danielribeiro/print-foo
                       [org.clojure/tools.trace "0.7.6"] ; Tracing macros/fns https://github.com/clojure/tools.trace
-                      [com.cemerick/piggieback "0.1.2"] ; ClojureScript bREPL from the nREPL https://github.com/cemerick/piggieback
+                      [com.cemerick/piggieback "0.1.3"]
                       [clj-ns-browser "1.3.1"] ; Doc browser https://github.com/franks42/clj-ns-browser
-                      [org.clojure/tools.nrepl "0.2.3"]
+                      [cider/cider-nrepl "0.8.0-SNAPSHOT"]
                       [ring-mock "0.1.5"]
                     ]
       :injections [
@@ -123,7 +123,7 @@
    ;; if :css-dirs is set figwheel will detect css file changes and
    ;; send them to the browser
    :css-dirs ["resources/public/css"]
-}
+  }
 
   :aliases {"dev-cards" ["do" "clean," "figwheel" "devcards"]
             "auto-test" ["do" "clean," "cljsbuild" "auto" "test"]}
