@@ -13,7 +13,6 @@
 (defn log [s]
   (.log js/console (str s)))
 
-; do this
 ; moment().add('month', -1).endOf('month').startOf('week').add('days',1).format()
 (defn last-monday [current]
   (->
@@ -22,6 +21,15 @@
     (.endOf "month")
     (.startOf "week")
     (.add "days" 1)))
+
+; moment().add("month", 1).startOf('month').endOf('week').add('days', 1).format("dddd/DD/MM/YYYY")
+(defn first-sunday [current]
+  (->
+     current
+     (.add "month" 1)
+     (.startOf "month")
+     (.endOf "week")
+     (.add "days" 1)))
 
 (defn first-day-of-month [current]
   (let [cloned-date (.clone current)
@@ -39,7 +47,7 @@
         week-day (.weekday end-of-month)]
    (if (= 0 week-day)
      end-of-month
-     end-of-month)))
+     (first-sunday end-of-month))))
 
 (defn ical [data]
   (reify
