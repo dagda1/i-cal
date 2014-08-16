@@ -6,6 +6,8 @@
 
 (enable-console-print!)
 
+(def date-format "DD/MM/YYYY")
+
 (def weekdays ["saturday" "monday" "tuesday" "wednesday" "thursday" "friday" "sunday"])
 
 (defn log [s]
@@ -22,11 +24,22 @@
     (.add "days" 1)))
 
 (defn first-day-of-month [current]
-  (let [start-of-month (.date current 1)
+  (let [cloned-date (.clone current)
+        start-of-month (.startOf cloned-date "month")
         week-day (.weekday start-of-month)]
     (if (= 1 week-day)
       start-of-month
-      (last-monday current))))
+      (last-monday cloned-date))))
+
+(defn last-day-of-month [current]
+  (let [cloned-date (.clone current)
+        end-of-month (->
+                        cloned-date
+                        (.endOf "month"))
+        week-day (.weekday end-of-month)]
+   (if (= 0 week-day)
+     end-of-month
+     end-of-month)))
 
 (defn ical [data]
   (reify
@@ -36,8 +49,10 @@
     om/IRender
       (render [this]
         (let [today (js/moment (new js/Date))
-              first-day-of-month (first-day-of-month today)]
-          (log (.format first-day-of-month "DD/MM/YYYY"))
+              first-day-of-month (first-day-of-month today)
+              last-day-of-month (last-day-of-month today)]
+          (log (str "start-date = " (.format first-day-of-month date-format)))
+          (log (str "end-date = " (.format last-day-of-month date-format)))
           (html/html [:div.calendar-toolbar
                       [:div.btn-group.pull-right
                        [:a.right {:href "#"} "Right"]
