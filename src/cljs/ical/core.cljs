@@ -50,13 +50,13 @@
      (first-sunday end-of-month))))
 
 (defn weeks [start-date]
-  (for [week-counter (range 0 35 7)]
+  (vec (for [week-counter (range 0 35 7)]
     (vec (for [day-counter (range 7)]
       (->
        start-date
        (.clone)
        (.add "days" (+ week-counter day-counter))
-       (.format date-format))))))
+       (.format date-format)))))))
 
 (defn ical [data]
   (reify
