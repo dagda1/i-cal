@@ -55,10 +55,13 @@
       (->
        start-date
        (.clone)
-       (.add "days" (+ week-counter day-counter))
-       (.format date-format)))))))
+       (.add "days" (+ week-counter day-counter))))))))
 
-(defn ical [data]
+(defn render-weeks [week-counter]
+  [:tr
+   [:td "flappies"]])
+
+(defn ical [data owner]
   (reify
     om/IDisplayName
       (display-name [_]
@@ -76,4 +79,6 @@
                       [:h3 "August 2014"]
                       [:table.table.table-striped.table-bordered.table-hover
                        [:thead
-                        [:tr (map #(identity [:th %]) weekdays)]]]])))))
+                        [:tr (map #(identity [:th %]) weekdays)]]
+                       [:tbody
+                        (map render-weeks (range 0 35 7))]]])))))
