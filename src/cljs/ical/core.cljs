@@ -49,6 +49,15 @@
      end-of-month
      (first-sunday end-of-month))))
 
+(defn weeks [start-date]
+  (for [week-counter (range 0 35 7)]
+    (vec (for [day-counter (range 7)]
+      (->
+       start-date
+       (.clone)
+       (.add "days" (+ week-counter day-counter))
+       (.format date-format))))))
+
 (defn ical [data]
   (reify
     om/IDisplayName
@@ -58,9 +67,8 @@
       (render [this]
         (let [today (js/moment (new js/Date))
               first-day-of-month (first-day-of-month today)
-              last-day-of-month (last-day-of-month today)]
-          (log (str "start-date = " (.format first-day-of-month date-format)))
-          (log (str "end-date = " (.format last-day-of-month date-format)))
+              weeks (weeks first-day-of-month)]
+          (log weeks)
           (html/html [:div.calendar-toolbar
                       [:div.btn-group.pull-right
                        [:a.right {:href "#"} "Right"]
