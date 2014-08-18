@@ -12,7 +12,7 @@
             [clojure.java.io :as io]))
 
 (defroutes app
-  (ANY "/" [] (resp/redirect "/index.html")) 
+  (ANY "/" [] (resp/redirect "/index.html"))
 
   (route/resources "/"))
 
